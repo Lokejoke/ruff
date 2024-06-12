@@ -8,9 +8,9 @@ use ruff_text_size::Ranged;
 use crate::checkers::ast::Checker;
 use crate::registry::Rule;
 use crate::rules::{
-    airflow, flake8_bandit, flake8_boolean_trap, flake8_bugbear, flake8_builtins, flake8_debugger,
-    flake8_django, flake8_errmsg, flake8_import_conventions, flake8_pie, flake8_pyi,
-    flake8_pytest_style, flake8_raise, flake8_return, flake8_simplify, flake8_slots,
+    airflow, brt_lint, flake8_bandit, flake8_boolean_trap, flake8_bugbear, flake8_builtins,
+    flake8_debugger, flake8_django, flake8_errmsg, flake8_import_conventions, flake8_pie,
+    flake8_pyi, flake8_pytest_style, flake8_raise, flake8_return, flake8_simplify, flake8_slots,
     flake8_tidy_imports, flake8_trio, flake8_type_checking, mccabe, pandas_vet, pep8_naming,
     perflint, pycodestyle, pyflakes, pygrep_hooks, pylint, pyupgrade, refurb, ruff, tryceratops,
 };
@@ -90,6 +90,11 @@ pub(crate) fn statement(stmt: &Stmt, checker: &mut Checker) {
             }
             if checker.enabled(Rule::AmbiguousFunctionName) {
                 if let Some(diagnostic) = pycodestyle::rules::ambiguous_function_name(name) {
+                    checker.diagnostics.push(diagnostic);
+                }
+            }
+            if checker.enabled(Rule::FunctionNamedA) {
+                if let Some(diagnostic) = brt_lint::rules::function_named_a(name) {
                     checker.diagnostics.push(diagnostic);
                 }
             }

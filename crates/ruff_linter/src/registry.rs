@@ -205,6 +205,9 @@ pub enum Linter {
     /// [refurb](https://pypi.org/project/refurb/)
     #[prefix = "FURB"]
     Refurb,
+    /// [BRT-lint](https://is.muni.cz/auth/osoba/524841)
+    #[prefix = "BRT"]
+    BrtLint,
     /// Ruff-specific rules
     #[prefix = "RUF"]
     Ruff,
