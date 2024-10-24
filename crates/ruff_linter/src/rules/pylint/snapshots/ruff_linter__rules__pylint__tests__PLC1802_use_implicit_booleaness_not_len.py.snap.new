@@ -1,0 +1,139 @@
+---
+source: crates/ruff_linter/src/rules/pylint/mod.rs
+assertion_line: 231
+---
+use_implicit_booleaness_not_len.py:4:4: PLC1802 Do not use `len(SEQUENCE)` without comparison to determine if a sequence is empty
+  |
+2 | # pylint: disable=useless-super-delegation,wrong-import-position,invalid-name, wrong-import-order, condition-evals-to-constant
+3 | 
+4 | if len('TEST'):  # [use-implicit-booleaness-not-len]
+  |    ^^^^^^^^^^^ PLC1802
+5 |     pass
+  |
+
+use_implicit_booleaness_not_len.py:7:8: PLC1802 Do not use `len(SEQUENCE)` without comparison to determine if a sequence is empty
+  |
+5 |     pass
+6 | 
+7 | if not len('TEST'):  # [use-implicit-booleaness-not-len]
+  |        ^^^^^^^^^^^ PLC1802
+8 |     pass
+  |
+
+use_implicit_booleaness_not_len.py:11:10: PLC1802 Do not use `len(SEQUENCE)` without comparison to determine if a sequence is empty
+   |
+10 | z = []
+11 | if z and len(['T', 'E', 'S', 'T']):  # [use-implicit-booleaness-not-len]
+   |          ^^^^^^^^^^^^^^^^^^^^^^^^^ PLC1802
+12 |     pass
+   |
+
+use_implicit_booleaness_not_len.py:14:12: PLC1802 Do not use `len(SEQUENCE)` without comparison to determine if a sequence is empty
+   |
+12 |     pass
+13 | 
+14 | if True or len('TEST'):  # [use-implicit-booleaness-not-len]
+   |            ^^^^^^^^^^^ PLC1802
+15 |     pass
+   |
+
+use_implicit_booleaness_not_len.py:56:6: PLC1802 Do not use `len(SEQUENCE)` without comparison to determine if a sequence is empty
+   |
+54 | if z:
+55 |     pass
+56 | elif len('TEST'):  # [use-implicit-booleaness-not-len]
+   |      ^^^^^^^^^^^ PLC1802
+57 |     pass
+   |
+
+use_implicit_booleaness_not_len.py:61:10: PLC1802 Do not use `len(SEQUENCE)` without comparison to determine if a sequence is empty
+   |
+59 | if z:
+60 |     pass
+61 | elif not len('TEST'):  # [use-implicit-booleaness-not-len]
+   |          ^^^^^^^^^^^ PLC1802
+62 |     pass
+   |
+
+use_implicit_booleaness_not_len.py:64:7: PLC1802 Do not use `len(SEQUENCE)` without comparison to determine if a sequence is empty
+   |
+62 |     pass
+63 | 
+64 | while len('TEST'):  # [use-implicit-booleaness-not-len]
+   |       ^^^^^^^^^^^ PLC1802
+65 |     pass
+   |
+
+use_implicit_booleaness_not_len.py:67:11: PLC1802 Do not use `len(SEQUENCE)` without comparison to determine if a sequence is empty
+   |
+65 |     pass
+66 | 
+67 | while not len('TEST'):  # [use-implicit-booleaness-not-len]
+   |           ^^^^^^^^^^^ PLC1802
+68 |     pass
+   |
+
+use_implicit_booleaness_not_len.py:70:13: PLC1802 Do not use `len(SEQUENCE)` without comparison to determine if a sequence is empty
+   |
+68 |     pass
+69 | 
+70 | while z and len('TEST'):  # [use-implicit-booleaness-not-len]
+   |             ^^^^^^^^^^^ PLC1802
+71 |     pass
+   |
+
+use_implicit_booleaness_not_len.py:73:11: PLC1802 Do not use `len(SEQUENCE)` without comparison to determine if a sequence is empty
+   |
+71 |     pass
+72 | 
+73 | while not len('TEST') and z:  # [use-implicit-booleaness-not-len]
+   |           ^^^^^^^^^^^ PLC1802
+74 |     pass
+   |
+
+use_implicit_booleaness_not_len.py:105:10: PLC1802 Do not use `len(SEQUENCE)` without comparison to determine if a sequence is empty
+    |
+104 | b = bool(len(z)) # [use-implicit-booleaness-not-len]
+105 | c = bool(len('TEST') or 42) # [use-implicit-booleaness-not-len]
+    |          ^^^^^^^^^^^ PLC1802
+106 | 
+107 | def github_issue_1879():
+    |
+
+use_implicit_booleaness_not_len.py:127:12: PLC1802 Do not use `len(SEQUENCE)` without comparison to determine if a sequence is empty
+    |
+125 |     assert len(ChildClassWithoutBool())  # [use-implicit-booleaness-not-len]
+126 |     assert len(range(0))  # [use-implicit-booleaness-not-len]
+127 |     assert len([t + 1 for t in []])  # [use-implicit-booleaness-not-len]
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^ PLC1802
+128 |     assert len(u + 1 for u in [])  # [use-implicit-booleaness-not-len]
+129 |     assert len({"1":(v + 1) for v in {}})  # [use-implicit-booleaness-not-len]
+    |
+
+use_implicit_booleaness_not_len.py:128:12: PLC1802 Do not use `len(SEQUENCE)` without comparison to determine if a sequence is empty
+    |
+126 |     assert len(range(0))  # [use-implicit-booleaness-not-len]
+127 |     assert len([t + 1 for t in []])  # [use-implicit-booleaness-not-len]
+128 |     assert len(u + 1 for u in [])  # [use-implicit-booleaness-not-len]
+    |            ^^^^^^^^^^^^^^^^^^^^^^ PLC1802
+129 |     assert len({"1":(v + 1) for v in {}})  # [use-implicit-booleaness-not-len]
+130 |     assert len(set((w + 1) for w in set()))  # [use-implicit-booleaness-not-len]
+    |
+
+use_implicit_booleaness_not_len.py:129:12: PLC1802 Do not use `len(SEQUENCE)` without comparison to determine if a sequence is empty
+    |
+127 |     assert len([t + 1 for t in []])  # [use-implicit-booleaness-not-len]
+128 |     assert len(u + 1 for u in [])  # [use-implicit-booleaness-not-len]
+129 |     assert len({"1":(v + 1) for v in {}})  # [use-implicit-booleaness-not-len]
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ PLC1802
+130 |     assert len(set((w + 1) for w in set()))  # [use-implicit-booleaness-not-len]
+    |
+
+use_implicit_booleaness_not_len.py:190:4: PLC1802 Do not use `len(SEQUENCE)` without comparison to determine if a sequence is empty
+    |
+188 | # pylint: disable=len-as-condition
+189 | 
+190 | if len('TEST'):
+    |    ^^^^^^^^^^^ PLC1802
+191 |     pass
+    |

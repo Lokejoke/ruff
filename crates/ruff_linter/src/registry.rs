@@ -208,6 +208,9 @@ pub enum Linter {
     /// [BRT-lint](https://is.muni.cz/auth/osoba/524841)
     #[prefix = "BRT"]
     BrtLint,
+    /// [wps-light](https://pypi.org/project/wps-light/)
+    #[prefix = "WPS"]
+    WpsLight,
     /// Ruff-specific rules
     #[prefix = "RUF"]
     Ruff,

@@ -218,6 +218,11 @@ pub fn code_to_rule(linter: Linter, code: &str) -> Option<(RuleGroup, Rule)> {
         (Pyflakes, "901") => (RuleGroup::Stable, rules::pyflakes::rules::RaiseNotImplemented),
 
         // pylint
+        #[allow(deprecated)]
+        #[allow(deprecated)]
+        #[allow(deprecated)]
+        #[allow(deprecated)]
+        (Pylint, "C1802") => (RuleGroup::Preview, rules::pylint::rules::UseImplicitBooleanessNotLen),
         (Pylint, "C0105") => (RuleGroup::Stable, rules::pylint::rules::TypeNameIncorrectVariance),
         (Pylint, "C0131") => (RuleGroup::Stable, rules::pylint::rules::TypeBivariance),
         (Pylint, "C0132") => (RuleGroup::Stable, rules::pylint::rules::TypeParamNameMismatch),
@@ -225,8 +230,7 @@ pub fn code_to_rule(linter: Linter, code: &str) -> Option<(RuleGroup, Rule)> {
         (Pylint, "C0208") => (RuleGroup::Stable, rules::pylint::rules::IterationOverSet),
         (Pylint, "C0414") => (RuleGroup::Stable, rules::pylint::rules::UselessImportAlias),
         (Pylint, "C0415") => (RuleGroup::Preview, rules::pylint::rules::ImportOutsideTopLevel),
-        #[allow(deprecated)]
-        (Pylint, "C1901") => (RuleGroup::Nursery, rules::pylint::rules::CompareToEmptyString),
+        (Pylint, "C1901") => (RuleGroup::Preview, rules::pylint::rules::CompareToEmptyString),
         (Pylint, "C2401") => (RuleGroup::Preview, rules::pylint::rules::NonAsciiName),
         (Pylint, "C2403") => (RuleGroup::Preview, rules::pylint::rules::NonAsciiImportName),
         (Pylint, "C2701") => (RuleGroup::Preview, rules::pylint::rules::ImportPrivateName),
@@ -299,16 +303,15 @@ pub fn code_to_rule(linter: Linter, code: &str) -> Option<(RuleGroup, Rule)> {
         (Pylint, "R5501") => (RuleGroup::Stable, rules::pylint::rules::CollapsibleElseIf),
         (Pylint, "R6104") => (RuleGroup::Preview, rules::pylint::rules::NonAugmentedAssignment),
         (Pylint, "R6201") => (RuleGroup::Preview, rules::pylint::rules::LiteralMembership),
-        #[allow(deprecated)]
         (Pylint, "R6301") => (RuleGroup::Nursery, rules::pylint::rules::NoSelfUse),
         (Pylint, "W0108") => (RuleGroup::Preview, rules::pylint::rules::UnnecessaryLambda),
-        (Pylint, "W0177") => (RuleGroup::Preview, rules::pylint::rules::NanComparison),
         (Pylint, "W0120") => (RuleGroup::Stable, rules::pylint::rules::UselessElseOnLoop),
         (Pylint, "W0127") => (RuleGroup::Stable, rules::pylint::rules::SelfAssigningVariable),
         (Pylint, "W0128") => (RuleGroup::Preview, rules::pylint::rules::RedeclaredAssignedName),
         (Pylint, "W0129") => (RuleGroup::Stable, rules::pylint::rules::AssertOnStringLiteral),
         (Pylint, "W0131") => (RuleGroup::Stable, rules::pylint::rules::NamedExprWithoutContext),
         (Pylint, "W0133") => (RuleGroup::Preview, rules::pylint::rules::UselessExceptionStatement),
+        (Pylint, "W0177") => (RuleGroup::Preview, rules::pylint::rules::NanComparison),
         (Pylint, "W0211") => (RuleGroup::Preview, rules::pylint::rules::BadStaticmethodArgument),
         (Pylint, "W0245") => (RuleGroup::Preview, rules::pylint::rules::SuperWithoutBrackets),
         (Pylint, "W0406") => (RuleGroup::Stable, rules::pylint::rules::ImportSelf),
@@ -322,11 +325,9 @@ pub fn code_to_rule(linter: Linter, code: &str) -> Option<(RuleGroup, Rule)> {
         (Pylint, "W1509") => (RuleGroup::Stable, rules::pylint::rules::SubprocessPopenPreexecFn),
         (Pylint, "W1510") => (RuleGroup::Stable, rules::pylint::rules::SubprocessRunWithoutCheck),
         (Pylint, "W1514") => (RuleGroup::Preview, rules::pylint::rules::UnspecifiedEncoding),
-        #[allow(deprecated)]
         (Pylint, "W1641") => (RuleGroup::Nursery, rules::pylint::rules::EqWithoutHash),
         (Pylint, "W2101") => (RuleGroup::Preview, rules::pylint::rules::UselessWithLock),
         (Pylint, "W2901") => (RuleGroup::Stable, rules::pylint::rules::RedefinedLoopName),
-        #[allow(deprecated)]
         (Pylint, "W3201") => (RuleGroup::Nursery, rules::pylint::rules::BadDunderMethodName),
         (Pylint, "W3301") => (RuleGroup::Stable, rules::pylint::rules::NestedMinMax),
 
@@ -950,6 +951,11 @@ pub fn code_to_rule(linter: Linter, code: &str) -> Option<(RuleGroup, Rule)> {
 
         // BRT-lint
         (BrtLint, "001") => (RuleGroup::Stable, rules::brt_lint::rules::FunctionNamedA),
+
+        // wps-light
+        (WpsLight, "116") => (RuleGroup::Preview, rules::wps_light::rules::ConsecutiveUndersocresInName),
+        (WpsLight, "303") => (RuleGroup::Preview, rules::wps_light::rules::UnderscoresInNumbers),
+        (WpsLight, "508") => (RuleGroup::Preview, rules::wps_light::rules::NotOperatorWithCompare),
 
         // ruff
         (Ruff, "001") => (RuleGroup::Stable, rules::ruff::rules::AmbiguousUnicodeCharacterString),
