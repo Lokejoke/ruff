@@ -15,6 +15,7 @@ mod tests {
 
     #[test_case(Rule::ConsecutiveUnderscoresInName, Path::new("WPS116.py"))]
     #[test_case(Rule::UseOfUnusedMarkedVariables, Path::new("WPS121.py"))]
+    #[test_case(Rule::GetterWithoutReturnValue, Path::new("WPS463.py"))]
     fn rules(rule_code: Rule, path: &Path) -> Result<()> {
         let snapshot = format!("{}_{}", rule_code.as_ref(), path.to_string_lossy());
         let diagnostics = test_path(
