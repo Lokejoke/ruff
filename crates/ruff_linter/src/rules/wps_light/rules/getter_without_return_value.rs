@@ -83,7 +83,7 @@ pub(crate) fn getter_without_return_value(checker: &mut Checker, function_def: &
 fn is_not_implemented_function(function_def: &StmtFunctionDef, semantic: &SemanticModel) -> bool {
     let body = &function_def.body;
 
-    // Checks if last and only statment is doc string
+    // Checks if last and only statement is doc string
     if body.len() == 1 {
         if let Stmt::Expr(StmtExpr { value, range: _ }) = &body[0] {
             if value.is_string_literal_expr() {
