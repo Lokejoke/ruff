@@ -211,12 +211,6 @@ pub enum Linter {
     /// [wps-light](https://pypi.org/project/wps-light/)
     #[prefix = "WPS"]
     WpsLight,
-    /// [wps-light](https://pypi.org/project/wps-light/)
-    #[prefix = "WPS"]
-    WpsLight,
-    /// [wps-light](https://pypi.org/project/wps-light/)
-    #[prefix = "WPS"]
-    WpsLight,
     /// Ruff-specific rules
     #[prefix = "RUF"]
     Ruff,
