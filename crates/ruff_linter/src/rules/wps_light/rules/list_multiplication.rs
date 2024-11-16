@@ -22,7 +22,6 @@ use crate::checkers::ast::Checker;
 ///
 /// ## Example
 /// ```python
-/// ```python
 /// row = [""] * 3
 /// tic_tac_toe = [row] * 3
 ///
