@@ -27,7 +27,7 @@ use crate::checkers::ast::Checker;
 /// tic_tac_toe = [row] * 3
 ///
 /// tic_tac_toe[0][0] = "X"
-/// tic_tac_toe  # [['X', "", ""], ['X', "", ""], ['X', "", ""]]
+/// tic_tac_toe  # [["X", "", ""], ["X", "", ""], ["", "", ""]]
 /// ```
 ///
 /// Use instead:
@@ -36,7 +36,7 @@ use crate::checkers::ast::Checker;
 /// row = [[""] * 3 for _ in range(3)]
 ///
 /// tic_tac_toe[0][0] = "X"
-/// tic_tac_toe  # [['X', "", ""], ["", "", ""], ["", "", ""]]
+/// tic_tac_toe  # [["X", "", ""], ["", "", ""], ["", "", ""]]
 /// ```
 #[violation]
 pub struct ListMultiplication;
