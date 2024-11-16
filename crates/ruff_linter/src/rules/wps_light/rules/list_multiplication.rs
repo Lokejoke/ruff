@@ -14,17 +14,17 @@ use crate::checkers::ast::Checker;
 
 /// ## What it does
 /// Checks for multiplication of list of mutable objects
-/// 
+///
 /// ## Why is this bad?
 /// Mutable objects in a list can lead to unexpected behavior when the list is multiplied.
-/// Each element in the resulting list will refer to the same mutable object. Any modification 
+/// Each element in the resulting list will refer to the same mutable object. Any modification
 /// to one element affects all instances in the multiplied list. This can lead to bugs that are difficult to trace.
 ///
 /// ## Example
 /// ```python
 /// row = [""] * 3  # row i['', '', '']
 /// tic_tac_toe = [row] * 3
-/// 
+///
 /// tic_tac_toe[0][0] = 'X'
 /// tic_tac_toe  # [['X', '', ''], ['X', '', ''], ['X', '', '']]
 /// ```
@@ -32,7 +32,7 @@ use crate::checkers::ast::Checker;
 /// Use instead:
 /// ```python
 /// tic_tac_toe = [[''] * 3 for _ in range(3)]
-/// 
+///
 /// tic_tac_toe[0][0] = 'X'
 /// tic_tac_toe  # [['X', '', ''], ['', '', ''], ['', '', '']]
 /// ```
@@ -110,15 +110,13 @@ fn is_nested_list_like(expr: &Expr, semantic: &SemanticModel) -> bool {
 }
 
 fn is_terminal_list_like(expr: &Expr, semantic: &SemanticModel) -> bool {
-    match expr { 
-        Expr::BinOp(
-            ExprBinOp {
-                op: Operator::Mult,
-                left,
-                right,
-                ..
-            },
-        )  => {        
+    match expr {
+        Expr::BinOp(ExprBinOp {
+            op: Operator::Mult,
+            left,
+            right,
+            ..
+        }) => {
             let operands = [left, right];
             if operands
                 .into_iter()
@@ -141,7 +139,7 @@ fn is_terminal_list_like(expr: &Expr, semantic: &SemanticModel) -> bool {
         Expr::Call(ExprCall { func, .. }) => semantic.match_builtin_expr(func, "range"),
         Expr::Name(expr_name) => get_name_value(expr_name, semantic)
             .is_some_and(|value| is_terminal_list_like(value, semantic)),
-        _ => typing::is_mutable_expr(expr, semantic)
+        _ => typing::is_mutable_expr(expr, semantic),
     }
 }
 
