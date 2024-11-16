@@ -14,6 +14,7 @@ mod tests {
     use crate::{assert_messages, settings};
 
     #[test_case(Rule::Dummy, Path::new("WPS000.py"))]
+    #[test_case(Rule::ListMultiplication, Path::new("WPS435.py"))]
     fn rules(rule_code: Rule, path: &Path) -> Result<()> {
         let snapshot = format!("{}_{}", rule_code.as_ref(), path.to_string_lossy());
         let diagnostics = test_path(
