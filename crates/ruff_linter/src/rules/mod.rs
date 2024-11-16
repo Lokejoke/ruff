@@ -57,3 +57,6 @@ pub mod pyupgrade;
 pub mod refurb;
 pub mod ruff;
 pub mod tryceratops;
+pub mod wps_light;
+pub mod wps_light;
+pub mod wps_light;
