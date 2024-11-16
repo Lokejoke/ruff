@@ -22,7 +22,7 @@ use crate::checkers::ast::Checker;
 ///
 /// ## Example
 /// ```python
-/// row = [""] * 3  # row i['', '', '']
+/// row = [''] * 3  # row i['', '', '']
 /// tic_tac_toe = [row] * 3
 ///
 /// tic_tac_toe[0][0] = 'X'
@@ -31,7 +31,7 @@ use crate::checkers::ast::Checker;
 ///
 /// Use instead:
 /// ```python
-/// tic_tac_toe = [[''] * 3 for _ in range(3)]
+/// row =[[''] * 3 for _ in range(3)]
 ///
 /// tic_tac_toe[0][0] = 'X'
 /// tic_tac_toe  # [['X', '', ''], ['', '', ''], ['', '', '']]
