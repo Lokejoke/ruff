@@ -936,10 +936,6 @@ pub fn code_to_rule(linter: Linter, code: &str) -> Option<(RuleGroup, Rule)> {
         // wps-light
         (WpsLight, "525") => (RuleGroup::Preview, rules::wps_light::rules::InCompareWithSingleItemContainer),
 
-        // wps-light
-
-        // wps-light
-
         // ruff
         (Ruff, "001") => (RuleGroup::Stable, rules::ruff::rules::AmbiguousUnicodeCharacterString),
         (Ruff, "002") => (RuleGroup::Stable, rules::ruff::rules::AmbiguousUnicodeCharacterDocstring),
