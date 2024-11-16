@@ -935,6 +935,7 @@ pub fn code_to_rule(linter: Linter, code: &str) -> Option<(RuleGroup, Rule)> {
 
         // wps-light
         (WpsLight, "000") => (RuleGroup::Preview, rules::wps_light::rules::Dummy),
+        (WpsLight, "435") => (RuleGroup::Preview, rules::wps_light::rules::ListMultiplication),
 
         // ruff
         (Ruff, "001") => (RuleGroup::Stable, rules::ruff::rules::AmbiguousUnicodeCharacterString),
