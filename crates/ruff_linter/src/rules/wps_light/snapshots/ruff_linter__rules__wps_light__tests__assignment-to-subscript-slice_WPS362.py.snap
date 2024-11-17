@@ -1,0 +1,100 @@
+---
+source: crates/ruff_linter/src/rules/wps_light/mod.rs
+snapshot_kind: text
+---
+WPS362.py:1:1: WPS362 Assignment to a subscript slice found
+  |
+1 | a[1:3] = [1, 2]
+  | ^^^^^^ WPS362
+2 | a[slice(1)] = [1, 3]
+  |
+
+WPS362.py:4:1: WPS362 Assignment to a subscript slice found
+  |
+2 | a[slice(1)] = [1, 3]
+3 | 
+4 | a[:0], a[-1:] = prefix, suffix
+  | ^^^^^ WPS362
+5 | 
+6 | a[:] = complete_replacement
+  |
+
+WPS362.py:4:8: WPS362 Assignment to a subscript slice found
+  |
+2 | a[slice(1)] = [1, 3]
+3 | 
+4 | a[:0], a[-1:] = prefix, suffix
+  |        ^^^^^^ WPS362
+5 | 
+6 | a[:] = complete_replacement
+  |
+
+WPS362.py:6:1: WPS362 Assignment to a subscript slice found
+  |
+4 | a[:0], a[-1:] = prefix, suffix
+5 | 
+6 | a[:] = complete_replacement
+  | ^^^^ WPS362
+7 | 
+8 | a[0:0] = prepend
+  |
+
+WPS362.py:8:1: WPS362 Assignment to a subscript slice found
+   |
+ 6 | a[:] = complete_replacement
+ 7 | 
+ 8 | a[0:0] = prepend
+   | ^^^^^^ WPS362
+ 9 | 
+10 | a[0] = 1
+   |
+
+WPS362.py:16:1: WPS362 Assignment to a subscript slice found
+   |
+14 | board = [["_"] * size for _ in range(size)]
+15 | 
+16 | board[0:1][1:2] = "X"
+   | ^^^^^^^^^^^^^^^ WPS362
+17 | 
+18 | board[0] = board[0:1] = board[1:2] = [board[0][:], board[1][:], board[2][:]] = board
+   |
+
+WPS362.py:18:12: WPS362 Assignment to a subscript slice found
+   |
+16 | board[0:1][1:2] = "X"
+17 | 
+18 | board[0] = board[0:1] = board[1:2] = [board[0][:], board[1][:], board[2][:]] = board
+   |            ^^^^^^^^^^ WPS362
+   |
+
+WPS362.py:18:25: WPS362 Assignment to a subscript slice found
+   |
+16 | board[0:1][1:2] = "X"
+17 | 
+18 | board[0] = board[0:1] = board[1:2] = [board[0][:], board[1][:], board[2][:]] = board
+   |                         ^^^^^^^^^^ WPS362
+   |
+
+WPS362.py:18:39: WPS362 Assignment to a subscript slice found
+   |
+16 | board[0:1][1:2] = "X"
+17 | 
+18 | board[0] = board[0:1] = board[1:2] = [board[0][:], board[1][:], board[2][:]] = board
+   |                                       ^^^^^^^^^^^ WPS362
+   |
+
+WPS362.py:18:52: WPS362 Assignment to a subscript slice found
+   |
+16 | board[0:1][1:2] = "X"
+17 | 
+18 | board[0] = board[0:1] = board[1:2] = [board[0][:], board[1][:], board[2][:]] = board
+   |                                                    ^^^^^^^^^^^ WPS362
+   |
+
+WPS362.py:18:65: WPS362 Assignment to a subscript slice found
+   |
+16 | board[0:1][1:2] = "X"
+17 | 
+18 | board[0] = board[0:1] = board[1:2] = [board[0][:], board[1][:], board[2][:]] = board
+   |                                                                 ^^^^^^^^^^^ WPS362
+   |

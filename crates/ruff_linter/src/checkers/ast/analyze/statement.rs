@@ -13,6 +13,7 @@ use crate::rules::{
     flake8_pie, flake8_pyi, flake8_pytest_style, flake8_raise, flake8_return, flake8_simplify,
     flake8_slots, flake8_tidy_imports, flake8_type_checking, mccabe, pandas_vet, pep8_naming,
     perflint, pycodestyle, pyflakes, pygrep_hooks, pylint, pyupgrade, refurb, ruff, tryceratops,
+    wps_light,
 };
 use crate::settings::types::PythonVersion;
 
@@ -1649,6 +1650,9 @@ pub(crate) fn statement(stmt: &Stmt, checker: &mut Checker) {
             }
             if checker.enabled(Rule::NonPEP695TypeAlias) {
                 pyupgrade::rules::non_pep695_type_alias_type(checker, assign);
+            }
+            if checker.enabled(Rule::AssignmentToSubscriptSlice) {
+                wps_light::rules::assignment_to_subscript_slice(checker, assign);
             }
         }
         Stmt::AnnAssign(
