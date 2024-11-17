@@ -15,7 +15,7 @@ use crate::checkers::ast::Checker;
 /// `in` comparison with container containing only one item
 /// looks like an overhead and unneeded complexity.
 ///
-/// Consider using `==` instead.
+/// Consider using equality test instead.
 ///
 /// ## Example
 /// ```python
@@ -26,13 +26,16 @@ use crate::checkers::ast::Checker;
 /// ```python
 /// a == "yes"
 /// ```
+///
+/// ## References:
+///  - [Python documentation: Membership test operations](https://docs.python.org/3/reference/expressions.html#membership-test-operations)
 #[violation]
 pub struct InCompareWithSingleItemContainer;
 
 impl Violation for InCompareWithSingleItemContainer {
     #[derive_message_formats]
     fn message(&self) -> String {
-        "Avoid comparing to a single item container with `in` or `not in` operator".to_string()
+        "Avoid comparing to a single item container with membership operator".to_string()
     }
 }
 
