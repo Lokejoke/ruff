@@ -5,7 +5,7 @@ use ruff_text_size::Ranged;
 
 use crate::checkers::ast::Checker;
 
-/// /// ## What it does
+/// ## What it does
 /// This rule checks for assignments to a subscript slice.
 ///
 /// ## Why is this bad?
@@ -23,12 +23,11 @@ use crate::checkers::ast::Checker;
 /// ```python
 /// a[5] = 1
 /// ```
-///
+/// 
 /// ## Notes
-/// * A common example of this, which violates the rule, is in-place list replacement using `[:]`.
+/// - A common example of this, which violates the rule, is in-place list replacement using `[:]`.
 /// This approach can replace the entire content of the list while maintaining the same object reference.
-///
-/// * Slice assignment is only in-place replacement of multiple array elements.
+/// - Slice assignment is only in-place replacement of multiple array elements.
 /// 
 /// ## References
 /// - [Python documentation: Assign](https://docs.python.org/3/library/ast.html#ast.Assign)
