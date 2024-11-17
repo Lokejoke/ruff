@@ -90,6 +90,7 @@ KNOWN_FORMATTING_VIOLATIONS = [
     "whitespace-before-close-bracket",
     "whitespace-before-parameters",
     "whitespace-before-punctuation",
+    "partial-float-literal",
 ]
 
 # For some docs, black is unable to parse the example code.
