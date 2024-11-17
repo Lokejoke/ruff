@@ -17,14 +17,14 @@ use crate::checkers::ast::Checker;
 ///
 /// ## Example
 /// ```python
-/// let phone = 8_83_134_43
-/// let million = 100_00_00
+/// phone = 8_83_134_43
+/// million = 100_00_00
 /// ```
 ///
 /// Use instead:
 /// ```python
-/// let phone = 88313443;
-/// let million = 1000000;
+/// phone = 88313443
+/// million = 1000000
 /// ```
 #[violation]
 pub struct UnderscoresInNumber {
