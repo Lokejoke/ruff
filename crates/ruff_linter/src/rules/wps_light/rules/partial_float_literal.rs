@@ -20,7 +20,7 @@ use crate::checkers::ast::Checker;
 /// ```
 ///
 /// Use instead:
-/// ```pytho
+/// ```python
 /// half = 0.5
 /// ten_float = 10.0
 /// ```
