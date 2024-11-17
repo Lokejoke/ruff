@@ -17,7 +17,7 @@ use crate::checkers::ast::Checker;
 /// a[1:3] = [1, 2]
 /// a[slice(1)] = [1, 3]
 /// ```
-///
+/// 
 /// Use instead:
 /// Instead of using slice assignment, modify individual elements to avoid implicit size changes and potential confusion:
 /// ```python
