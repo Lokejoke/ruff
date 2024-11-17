@@ -1,0 +1,119 @@
+---
+source: crates/ruff_linter/src/rules/wps_light/mod.rs
+snapshot_kind: text
+---
+WPS304.py:1:1: WPS304 [*] Found partial float literal `.1`
+  |
+1 | .1  # [WPS304]
+  | ^^ WPS304
+2 | 1.  # [WPS304]
+3 | 1E+1
+  |
+  = help: Insert beggining or trailing zero
+
+ℹ Safe fix
+1   |-.1  # [WPS304]
+  1 |+0.1  # [WPS304]
+2 2 | 1.  # [WPS304]
+3 3 | 1E+1
+4 4 | 1E-1
+
+WPS304.py:2:1: WPS304 [*] Found partial float literal `1.`
+  |
+1 | .1  # [WPS304]
+2 | 1.  # [WPS304]
+  | ^^ WPS304
+3 | 1E+1
+4 | 1E-1
+  |
+  = help: Insert beggining or trailing zero
+
+ℹ Safe fix
+1 1 | .1  # [WPS304]
+2   |-1.  # [WPS304]
+  2 |+1.0  # [WPS304]
+3 3 | 1E+1
+4 4 | 1E-1
+5 5 | 1.E+1
+
+WPS304.py:11:5: WPS304 [*] Found partial float literal `.1`
+   |
+ 9 | x = 123456789
+10 | x = 123456
+11 | x = .1  # [WPS304]
+   |     ^^ WPS304
+12 | x = 1.  # [WPS304]
+13 | x = 1E+1
+   |
+   = help: Insert beggining or trailing zero
+
+ℹ Safe fix
+8  8  | 
+9  9  | x = 123456789
+10 10 | x = 123456
+11    |-x = .1  # [WPS304]
+   11 |+x = 0.1  # [WPS304]
+12 12 | x = 1.  # [WPS304]
+13 13 | x = 1E+1
+14 14 | x = 1E-1
+
+WPS304.py:12:5: WPS304 [*] Found partial float literal `1.`
+   |
+10 | x = 123456
+11 | x = .1  # [WPS304]
+12 | x = 1.  # [WPS304]
+   |     ^^ WPS304
+13 | x = 1E+1
+14 | x = 1E-1
+   |
+   = help: Insert beggining or trailing zero
+
+ℹ Safe fix
+9  9  | x = 123456789
+10 10 | x = 123456
+11 11 | x = .1  # [WPS304]
+12    |-x = 1.  # [WPS304]
+   12 |+x = 1.0  # [WPS304]
+13 13 | x = 1E+1
+14 14 | x = 1E-1
+15 15 | x = 1.000_000_01
+
+WPS304.py:29:5: WPS304 [*] Found partial float literal `1.`
+   |
+28 | # Attribute access
+29 | x = 1. .imag  # [WPS304]
+   |     ^^ WPS304
+30 | x = 1E+1.imag
+31 | x = 1E-1.real
+   |
+   = help: Insert beggining or trailing zero
+
+ℹ Safe fix
+26 26 | x = 133333
+27 27 | 
+28 28 | # Attribute access
+29    |-x = 1. .imag  # [WPS304]
+   29 |+x = 1.0 .imag  # [WPS304]
+30 30 | x = 1E+1.imag
+31 31 | x = 1E-1.real
+32 32 | x = 123456789.123456789.hex()
+
+WPS304.py:64:1: WPS304 [*] Found partial float literal `.1_4`
+   |
+62 | 1_00_00.5
+63 | 1e1_0
+64 | .1_4  # [WPS304]
+   | ^^^^ WPS304
+65 | 0x_f
+66 | 0o_5
+   |
+   = help: Insert beggining or trailing zero
+
+ℹ Safe fix
+61 61 | 0o5_7_7
+62 62 | 1_00_00.5
+63 63 | 1e1_0
+64    |-.1_4  # [WPS304]
+   64 |+0.1_4  # [WPS304]
+65 65 | 0x_f
+66 66 | 0o_5
