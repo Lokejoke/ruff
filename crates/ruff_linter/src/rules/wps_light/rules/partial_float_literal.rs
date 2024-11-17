@@ -8,17 +8,17 @@ use crate::checkers::ast::Checker;
 /// ## What it does
 /// Checks for float literals that
 /// start or end with a dot, such as `.5`, `23.`, or `.05`.
-/// 
+///
 /// ## Why is this bad?
 /// While Python allows shorthand notation for floats (e.g., `.5` instead of `0.5`),
 /// it is recommended to avoid partial float literals to maintain consistency and clarity.
-/// 
+///
 /// ## Example
 /// ```python
 /// half = .5
 /// ten_float = 10.
 /// ```
-/// 
+///
 /// Use instead:
 /// ```python
 /// half = 0.5
