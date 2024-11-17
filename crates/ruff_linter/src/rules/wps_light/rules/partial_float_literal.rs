@@ -37,7 +37,7 @@ impl AlwaysFixableViolation for PartialFloatLiteral {
     }
 
     fn fix_title(&self) -> String {
-        "Insert beggining or trailing zero".to_string()
+        "Insert beginning or trailing zero".to_string()
     }
 }
 
