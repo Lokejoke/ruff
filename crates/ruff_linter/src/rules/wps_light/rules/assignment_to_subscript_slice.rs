@@ -17,18 +17,18 @@ use crate::checkers::ast::Checker;
 /// a[1:3] = [1, 2]
 /// a[slice(1)] = [1, 3]
 /// ```
-/// 
+///
 /// Use instead:
 /// Instead of using slice assignment, modify individual elements to avoid implicit size changes and potential confusion:
 /// ```python
 /// a[5] = 1
 /// ```
-/// 
+///
 /// ## Notes
 /// - A common example of this, which violates the rule, is in-place list replacement using `[:]`.
 /// This approach can replace the entire content of the list while maintaining the same object reference.
 /// - Slice assignment is only in-place replacement of multiple array elements.
-/// 
+///
 /// ## References
 /// - [Python documentation: Assign](https://docs.python.org/3/library/ast.html#ast.Assign)
 #[violation]
