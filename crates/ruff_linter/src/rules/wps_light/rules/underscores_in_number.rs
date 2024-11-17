@@ -26,7 +26,6 @@ use crate::checkers::ast::Checker;
 /// let phone = 88313443;
 /// let million = 1000000;
 /// ```
-
 #[violation]
 pub struct UnderscoresInNumber {
     number: String,
