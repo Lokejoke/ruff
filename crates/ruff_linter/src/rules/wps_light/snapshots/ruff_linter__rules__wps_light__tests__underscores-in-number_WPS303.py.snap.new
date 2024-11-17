@@ -1,0 +1,14 @@
+---
+source: crates/ruff_linter/src/rules/wps_light/mod.rs
+assertion_line: 23
+snapshot_kind: text
+---
+WPS303.py:15:5: WPS303 Number is separated in 
+   |
+13 | x = 1E+1
+14 | x = 1E-1
+15 | x = 1.000_000_01
+   |     ^^^^^^^^^^^^ WPS303
+16 | x = 123456789.123456789
+17 | x = 123456789.123456789E123456789
+   |
