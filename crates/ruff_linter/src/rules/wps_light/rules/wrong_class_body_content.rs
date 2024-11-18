@@ -4,7 +4,7 @@ use ruff_macros::{derive_message_formats, violation};
 use ruff_python_ast::{helpers::is_docstring_stmt, Stmt, StmtClassDef};
 use ruff_text_size::Ranged;
 
-use crate::{checkers::ast::Checker, rules::flake8_simplify::rules::enumerate_for_loop};
+use crate::{checkers::ast::Checker};
 
 /// ## What it does
 /// Checks for disallowed statements in the body of a class.
