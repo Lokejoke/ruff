@@ -1,0 +1,38 @@
+---
+source: crates/ruff_linter/src/rules/wps_light/mod.rs
+snapshot_kind: text
+---
+WPS604.py:87:5: WPS604 Wrong statement inside class definition
+   |
+86 |       # Conditional logic inside the class (not recommended but valid)
+87 |       if math.pi > 3:
+   |  _____^
+88 | |         def conditionally_defined_method(self):
+89 | |             print("This method exists because math.pi > 3.")
+   | |____________________________________________________________^ WPS604
+90 |       
+91 |       # For loop inside the class (unusual but valid)
+   |
+
+WPS604.py:92:5: WPS604 Wrong statement inside class definition
+   |
+91 |       # For loop inside the class (unusual but valid)
+92 |       for i in range(3):
+   |  _____^
+93 | |         exec(f"def loop_method_{i}(self): print('Loop-defined method {i}')")
+   | |____________________________________________________________________________^ WPS604
+94 |       
+95 |       # Docstrings for the class
+   |
+
+WPS604.py:96:5: WPS604 Wrong statement inside class definition
+    |
+ 95 |       # Docstrings for the class
+ 96 |       """
+    |  _____^
+ 97 | |     Additional class-level comments can be included in the docstring.
+ 98 | |     """
+    | |_______^ WPS604
+ 99 |       
+100 |       # List comprehensions inside a class (valid but rarely used)
+    |
