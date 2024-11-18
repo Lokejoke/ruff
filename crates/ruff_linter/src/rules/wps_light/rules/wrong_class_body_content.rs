@@ -19,13 +19,7 @@ use crate::{checkers::ast::Checker, rules::flake8_simplify::rules::enumerate_for
 /// ```python
 /// class Test:
 ///     for _ in range(10):
-///         print('What?!')
-/// ```
-///
-/// Use instead:
-/// ```python
-/// class Test:
-///     ...
+///         print("What?!")
 /// ```
 #[violation]
 pub struct WrongClassBodyContent;
