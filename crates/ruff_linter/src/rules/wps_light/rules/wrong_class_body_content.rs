@@ -4,7 +4,7 @@ use ruff_macros::{derive_message_formats, violation};
 use ruff_python_ast::{helpers::is_docstring_stmt, Stmt, StmtClassDef};
 use ruff_text_size::Ranged;
 
-use crate::{checkers::ast::Checker};
+use crate::checkers::ast::Checker;
 
 /// ## What it does
 /// Checks for disallowed statements in the body of a class.
