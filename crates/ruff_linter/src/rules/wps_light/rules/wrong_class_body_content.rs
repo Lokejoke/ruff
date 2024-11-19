@@ -1,4 +1,3 @@
-use itertools::enumerate;
 use ruff_diagnostics::{Diagnostic, Violation};
 use ruff_macros::{derive_message_formats, violation};
 use ruff_python_ast::{helpers::is_docstring_stmt, Stmt, StmtClassDef};
@@ -34,11 +33,8 @@ impl Violation for WrongClassBodyContent {
 /// WPS604
 pub(crate) fn wrong_class_body_content(checker: &mut Checker, class: &StmtClassDef) {
     let StmtClassDef { body, .. } = class;
-    for (index, stmt) in enumerate(body) {
-        if index == 0 && is_docstring_stmt(stmt) {
-            continue;
-        }
-        if !is_allowed_statement(stmt) {
+    for stmt in body {
+        if !is_docstring_stmt(stmt) && !is_allowed_statement(stmt) {
             checker
                 .diagnostics
                 .push(Diagnostic::new(WrongClassBodyContent, stmt.range()));
