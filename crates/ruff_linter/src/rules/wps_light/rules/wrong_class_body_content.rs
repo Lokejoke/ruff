@@ -49,6 +49,9 @@ pub(crate) fn wrong_class_body_content(checker: &mut Checker, class: &StmtClassD
 fn is_allowed_statement(stmt: &Stmt) -> bool {
     matches!(
         stmt,
-        Stmt::FunctionDef(_) | Stmt::ClassDef(_) | Stmt::Assign(_)
+        Stmt::FunctionDef(_)
+        | Stmt::ClassDef(_)
+        | Stmt::Assign(_)
+        | Stmt::AnnAssign(_)
     )
 }
