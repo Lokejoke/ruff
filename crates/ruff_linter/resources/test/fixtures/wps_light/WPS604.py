@@ -104,3 +104,23 @@ class ExampleClass:
     double = lambda x: x * 2
 
 
+g = 'module attribute (module-global variable)'
+"""This is g's docstring."""
+
+class AClass:
+
+    c = 'class attribute'
+    """This is AClass.c's docstring."""
+
+    def __init__(self):
+        """Method __init__'s docstring."""
+
+        self.i = 'instance attribute'
+        """This is self.i's docstring."""
+
+def f(x):
+    """Function f's docstring."""
+    return x**2
+
+f.a = 1
+"""Function attribute f.a's docstring."""

@@ -24,15 +24,3 @@ WPS604.py:92:5: WPS604 Wrong statement inside class definition
 94 |       
 95 |       # Docstrings for the class
    |
-
-WPS604.py:96:5: WPS604 Wrong statement inside class definition
-    |
- 95 |       # Docstrings for the class
- 96 |       """
-    |  _____^
- 97 | |     Additional class-level comments can be included in the docstring.
- 98 | |     """
-    | |_______^ WPS604
- 99 |       
-100 |       # List comprehensions inside a class (valid but rarely used)
-    |
