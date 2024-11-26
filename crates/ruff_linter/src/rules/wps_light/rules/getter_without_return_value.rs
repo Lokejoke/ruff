@@ -47,7 +47,7 @@ pub(crate) fn getter_without_return_value(checker: &mut Checker, function_def: &
     let StmtFunctionDef { body, name, .. } = function_def;
 
     // Matching regex (get_.\w+)
-    if name.len() <= 5 || !name.starts_with("get_") {
+    if name.len() < 5 || !name.starts_with("get_") {
         return;
     }
 
@@ -64,13 +64,7 @@ pub(crate) fn getter_without_return_value(checker: &mut Checker, function_def: &
     }
 
     // No return value
-    if visitor.returns.is_empty()
-        || visitor.returns.iter().any(|stmt| {
-            stmt.value
-                .as_ref()
-                .map_or(false, |value| !value.is_none_literal_expr())
-        })
-    {
+    if visitor.returns.is_empty() || visitor.returns.iter().any(|stmt| stmt.value.is_some()) {
         return;
     }
 
