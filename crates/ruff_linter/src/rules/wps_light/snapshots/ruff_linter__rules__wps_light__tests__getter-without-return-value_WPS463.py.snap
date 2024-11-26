@@ -21,33 +21,7 @@ WPS463.py:33:5: WPS463 Getter function returns no value.
 34 | |         return
    | |______________^ WPS463
 35 |   
-36 |   def get_val(cond_val):  # [WPS463]
-   |
-
-WPS463.py:36:1: WPS463 Getter function returns no value.
-   |
-34 |           return
-35 |   
-36 | / def get_val(cond_val):  # [WPS463]
-37 | |     if cond_val:
-38 | |         return None
-39 | |     else:
-40 | |         pass
-   | |____________^ WPS463
-41 |   
-42 |   def get_val(cond_val):  # [WPS463]
-   |
-
-WPS463.py:42:1: WPS463 Getter function returns no value.
-   |
-40 |           pass
-41 |   
-42 | / def get_val(cond_val):  # [WPS463]
-43 | |     if cond_val:
-44 | |         return None
-   | |___________________^ WPS463
-45 |       
-46 |   def get_val(cond_val):  # [WPS463]
+36 |   def get_val(cond_val):
    |
 
 WPS463.py:46:1: WPS463 Getter function returns no value.
@@ -56,7 +30,7 @@ WPS463.py:46:1: WPS463 Getter function returns no value.
 45 |       
 46 | / def get_val(cond_val):  # [WPS463]
 47 | |     if cond_val:
-48 | |         return None
+48 | |         return
 49 | |     while not cond_val:
 50 | |         print(cond_val)
    | |_______________________^ WPS463

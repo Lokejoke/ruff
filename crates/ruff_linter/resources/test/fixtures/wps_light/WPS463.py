@@ -33,19 +33,19 @@ class X:
     def get_val():  # [WPS463]
         return
 
-def get_val(cond_val):  # [WPS463]
+def get_val(cond_val):
     if cond_val:
         return None
     else:
         pass
 
-def get_val(cond_val):  # [WPS463]
+def get_val(cond_val):
     if cond_val:
         return None
     
 def get_val(cond_val):  # [WPS463]
     if cond_val:
-        return None
+        return
     while not cond_val:
         print(cond_val)
 

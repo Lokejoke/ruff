@@ -64,10 +64,10 @@ pub(crate) fn getter_without_return_value(checker: &mut Checker, function_def: &
     }
 
     // No return value
-    if visitor.returns.is_empty() || visitor.returns.iter().any(|stmt| stmt.value.is_some()) {
+    if visitor.returns.iter().any(|stmt| stmt.value.is_some()) {
         return;
     }
-
+    
     checker.diagnostics.push(Diagnostic::new(
         GetterWithoutReturnValue,
         function_def.range(),
