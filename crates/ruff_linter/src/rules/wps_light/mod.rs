@@ -16,6 +16,7 @@ mod tests {
     #[test_case(Rule::ConsecutiveUnderscoresInName, Path::new("WPS116.py"))]
     #[test_case(Rule::ReservedArgumentAsVariable, Path::new("WPS117.py"))]
     #[test_case(Rule::UnderscoresInNumber, Path::new("WPS303.py"))]
+    #[test_case(Rule::AssignmentToSubscriptSlice, Path::new("WPS362.py"))]
     fn rules(rule_code: Rule, path: &Path) -> Result<()> {
         let snapshot = format!("{}_{}", rule_code.as_ref(), path.to_string_lossy());
         let diagnostics = test_path(
