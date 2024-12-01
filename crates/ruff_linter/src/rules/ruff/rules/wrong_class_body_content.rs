@@ -1,5 +1,5 @@
 use ruff_diagnostics::{Diagnostic, Violation};
-use ruff_macros::{derive_message_formats, violation};
+use ruff_macros::{derive_message_formats, ViolationMetadata};
 use ruff_python_ast::{helpers::is_docstring_stmt, Stmt, StmtClassDef, StmtExpr};
 use ruff_text_size::Ranged;
 
@@ -23,8 +23,8 @@ use crate::checkers::ast::Checker;
 ///
 /// ## References
 /// - [WPS: wrong class body content](https://wemake-python-styleguide.readthedocs.io/en/0.19.2/pages/usage/violations/oop.html#wemake_python_styleguide.violations.oop.WrongClassBodyContentViolation)
-#[violation]
-pub struct WrongClassBodyContent;
+#[derive(ViolationMetadata)]
+pub(crate) struct WrongClassBodyContent;
 
 impl Violation for WrongClassBodyContent {
     #[derive_message_formats]

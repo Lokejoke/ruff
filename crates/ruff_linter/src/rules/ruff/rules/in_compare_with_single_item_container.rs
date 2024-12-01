@@ -1,7 +1,7 @@
 use std::iter::zip;
 
 use ruff_diagnostics::{Diagnostic, Violation};
-use ruff_macros::{derive_message_formats, violation};
+use ruff_macros::{derive_message_formats, ViolationMetadata};
 use ruff_python_ast::ExprCompare;
 use ruff_python_ast::{CmpOp, Expr};
 use ruff_text_size::Ranged;
@@ -29,8 +29,8 @@ use crate::checkers::ast::Checker;
 ///
 /// ## References
 ///  - [Python documentation: Membership test operations](https://docs.python.org/3/reference/expressions.html#membership-test-operations)
-#[violation]
-pub struct InCompareWithSingleItemContainer;
+#[derive(ViolationMetadata)]
+pub(crate) struct InCompareWithSingleItemContainer;
 
 impl Violation for InCompareWithSingleItemContainer {
     #[derive_message_formats]

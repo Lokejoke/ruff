@@ -948,7 +948,6 @@ pub fn code_to_rule(linter: Linter, code: &str) -> Option<(RuleGroup, Rule)> {
         // wps-light
         (WpsLight, "116") => (RuleGroup::Preview, rules::wps_light::rules::ConsecutiveUnderscoresInName),
         (WpsLight, "117") => (RuleGroup::Preview, rules::wps_light::rules::ReservedArgumentAsVariable),
-        (WpsLight, "121") => (RuleGroup::Preview, rules::wps_light::rules::UseOfUnusedMarkedVariables),
         (WpsLight, "303") => (RuleGroup::Preview, rules::wps_light::rules::UnderscoresInNumber),
         (WpsLight, "362") => (RuleGroup::Preview, rules::wps_light::rules::AssignmentToSubscriptSlice),
         (WpsLight, "435") => (RuleGroup::Preview, rules::wps_light::rules::ListMultiplication),
@@ -994,8 +993,8 @@ pub fn code_to_rule(linter: Linter, code: &str) -> Option<(RuleGroup, Rule)> {
         (Ruff, "041") => (RuleGroup::Preview, rules::ruff::rules::UnnecessaryNestedLiteral),
         (Ruff, "048") => (RuleGroup::Preview, rules::ruff::rules::MapIntVersionParsing),
         (Ruff, "050") => (RuleGroup::Preview, rules::ruff::rules::WrongClassBodyContent),
-        (Ruff, "052") => (RuleGroup::Preview, rules::ruff::rules::DummyVariableAccessed),
         (Ruff, "051") => (RuleGroup::Preview, rules::ruff::rules::InCompareWithSingleItemContainer),
+        (Ruff, "052") => (RuleGroup::Preview, rules::ruff::rules::DummyVariableAccessed),
         (Ruff, "055") => (RuleGroup::Preview, rules::ruff::rules::UnnecessaryRegularExpression),
         (Ruff, "100") => (RuleGroup::Stable, rules::ruff::rules::UnusedNOQA),
         (Ruff, "101") => (RuleGroup::Stable, rules::ruff::rules::RedirectedNOQA),

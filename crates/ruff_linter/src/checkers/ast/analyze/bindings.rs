@@ -4,8 +4,7 @@ use ruff_text_size::Ranged;
 use crate::checkers::ast::Checker;
 use crate::codes::Rule;
 use crate::rules::{
-    flake8_import_conventions, flake8_pyi, flake8_type_checking,
-    pyflakes, pylint, ruff, wps_light
+    flake8_import_conventions, flake8_pyi, flake8_type_checking, pyflakes, pylint, ruff, wps_light,
 };
 
 /// Run lint rules over the [`Binding`]s.

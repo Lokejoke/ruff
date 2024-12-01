@@ -1,5 +1,5 @@
 use ruff_diagnostics::{Diagnostic, Violation};
-use ruff_macros::{derive_message_formats, violation};
+use ruff_macros::{derive_message_formats, ViolationMetadata};
 use ruff_python_semantic::Binding;
 
 use crate::checkers::ast::Checker;
@@ -16,8 +16,8 @@ use crate::checkers::ast::Checker;
 /// cls = 5
 /// lambda self: self + 12
 /// ```
-#[violation]
-pub struct ReservedArgumentAsVariable {
+#[derive(ViolationMetadata)]
+pub(crate) struct ReservedArgumentAsVariable {
     name: String,
 }
 

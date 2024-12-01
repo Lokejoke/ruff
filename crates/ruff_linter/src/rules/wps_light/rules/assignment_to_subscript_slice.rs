@@ -1,5 +1,5 @@
 use ruff_diagnostics::{Diagnostic, Violation};
-use ruff_macros::{derive_message_formats, violation};
+use ruff_macros::{derive_message_formats, ViolationMetadata};
 use ruff_python_ast::{Expr, StmtAssign};
 use ruff_text_size::Ranged;
 
@@ -26,13 +26,13 @@ use crate::checkers::ast::Checker;
 ///
 /// ## Notes
 /// - A common example of this, which violates the rule, is in-place list replacement using `[:]`.
-/// This approach can replace the entire content of the list while maintaining the same object reference.
+/// - This approach can replace the entire content of the list while maintaining the same object reference.
 /// - Slice assignment is only in-place replacement of multiple array elements.
 ///
 /// ## References
 /// - [Python documentation: Assign](https://docs.python.org/3/library/ast.html#ast.Assign)
-#[violation]
-pub struct AssignmentToSubscriptSlice;
+#[derive(ViolationMetadata)]
+pub(crate) struct AssignmentToSubscriptSlice;
 
 impl Violation for AssignmentToSubscriptSlice {
     #[derive_message_formats]

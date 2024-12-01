@@ -2,7 +2,7 @@ use std::fmt;
 
 use itertools::Itertools;
 use ruff_diagnostics::{Diagnostic, Violation};
-use ruff_macros::{derive_message_formats, violation};
+use ruff_macros::{derive_message_formats, ViolationMetadata};
 use ruff_python_semantic::{Binding, BindingKind};
 use ruff_text_size::Ranged;
 
@@ -24,8 +24,8 @@ use crate::Locator;
 /// ```python
 /// long_variable_name: int = 3
 /// ```
-#[violation]
-pub struct ConsecutiveUnderscoresInName {
+#[derive(ViolationMetadata)]
+pub(crate) struct ConsecutiveUnderscoresInName {
     name: String,
     replacement: String,
     kind: Kind,

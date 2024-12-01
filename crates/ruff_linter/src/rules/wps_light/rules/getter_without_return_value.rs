@@ -1,5 +1,5 @@
 use ruff_diagnostics::{Diagnostic, Violation};
-use ruff_macros::{derive_message_formats, violation};
+use ruff_macros::{derive_message_formats, ViolationMetadata};
 use ruff_python_ast::{
     helpers::{map_callable, ReturnStatementVisitor},
     visitor::Visitor,
@@ -32,8 +32,8 @@ use crate::checkers::ast::Checker;
 ///         return None
 ///     pass
 /// ```
-#[violation]
-pub struct GetterWithoutReturnValue;
+#[derive(ViolationMetadata)]
+pub(crate) struct GetterWithoutReturnValue;
 
 impl Violation for GetterWithoutReturnValue {
     #[derive_message_formats]
@@ -67,7 +67,7 @@ pub(crate) fn getter_without_return_value(checker: &mut Checker, function_def: &
     if visitor.returns.iter().any(|stmt| stmt.value.is_some()) {
         return;
     }
-    
+
     checker.diagnostics.push(Diagnostic::new(
         GetterWithoutReturnValue,
         function_def.range(),

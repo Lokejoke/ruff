@@ -1,5 +1,5 @@
 use ruff_diagnostics::{AlwaysFixableViolation, Diagnostic, Edit, Fix};
-use ruff_macros::{derive_message_formats, violation};
+use ruff_macros::{derive_message_formats, ViolationMetadata};
 use ruff_python_ast::ExprNumberLiteral;
 use ruff_text_size::Ranged;
 
@@ -26,8 +26,8 @@ use crate::checkers::ast::Checker;
 /// phone = 88313443
 /// million = 1000000
 /// ```
-#[violation]
-pub struct UnderscoresInNumber {
+#[derive(ViolationMetadata)]
+pub(crate) struct UnderscoresInNumber {
     number: String,
 }
 

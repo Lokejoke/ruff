@@ -1,5 +1,5 @@
 use ruff_diagnostics::{Diagnostic, Violation};
-use ruff_macros::{derive_message_formats, violation};
+use ruff_macros::{derive_message_formats, ViolationMetadata};
 use ruff_python_ast::{Expr, ExprBinOp, ExprCall, ExprName, Operator};
 use ruff_python_semantic::analyze::typing::find_binding_value;
 use ruff_python_semantic::{
@@ -37,8 +37,8 @@ use crate::checkers::ast::Checker;
 /// tic_tac_toe[0][0] = "X"
 /// tic_tac_toe  # [["X", "", ""], ["", "", ""], ["", "", ""]]
 /// ```
-#[violation]
-pub struct ListMultiplication;
+#[derive(ViolationMetadata)]
+pub(crate) struct ListMultiplication;
 
 impl Violation for ListMultiplication {
     #[derive_message_formats]
