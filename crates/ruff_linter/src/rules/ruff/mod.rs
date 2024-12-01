@@ -71,6 +71,7 @@ mod tests {
     #[test_case(Rule::UnnecessaryNestedLiteral, Path::new("RUF041.py"))]
     #[test_case(Rule::UnnecessaryNestedLiteral, Path::new("RUF041.pyi"))]
     #[test_case(Rule::WrongClassBodyContent, Path::new("RUF050.py"))]
+    #[test_case(Rule::InCompareWithSingleItemContainer, Path::new("RUF051.py"))]
     #[test_case(Rule::DummyVariableAccessed, Path::new("RUF052.py"))]
     fn rules(rule_code: Rule, path: &Path) -> Result<()> {
         let snapshot = format!("{}_{}", rule_code.noqa_code(), path.to_string_lossy());

@@ -995,6 +995,7 @@ pub fn code_to_rule(linter: Linter, code: &str) -> Option<(RuleGroup, Rule)> {
         (Ruff, "048") => (RuleGroup::Preview, rules::ruff::rules::MapIntVersionParsing),
         (Ruff, "050") => (RuleGroup::Preview, rules::ruff::rules::WrongClassBodyContent),
         (Ruff, "052") => (RuleGroup::Preview, rules::ruff::rules::DummyVariableAccessed),
+        (Ruff, "051") => (RuleGroup::Preview, rules::ruff::rules::InCompareWithSingleItemContainer),
         (Ruff, "055") => (RuleGroup::Preview, rules::ruff::rules::UnnecessaryRegularExpression),
         (Ruff, "100") => (RuleGroup::Stable, rules::ruff::rules::UnusedNOQA),
         (Ruff, "101") => (RuleGroup::Stable, rules::ruff::rules::RedirectedNOQA),
