@@ -15,6 +15,7 @@ pub(crate) fn bindings(checker: &mut Checker) {
         Rule::InvalidAllFormat,
         Rule::InvalidAllObject,
         Rule::NonAsciiName,
+        Rule::ReservedArgumentAsVariable,
         Rule::UnaliasedCollectionsAbcSetImport,
         Rule::UnconventionalImportAlias,
         Rule::UnsortedDunderSlots,
@@ -106,6 +107,13 @@ pub(crate) fn bindings(checker: &mut Checker) {
                 wps_light::rules::consecutive_underscores_in_name(checker.locator(), binding)
             {
                 checker.diagnostics.push(diagnostic);
+            }
+        }
+        if checker.enabled(Rule::ReservedArgumentAsVariable) {
+            if let Some(dignostic) =
+                wps_light::rules::reserved_argument_as_variable(checker, binding)
+            {
+                checker.diagnostics.push(dignostic);
             }
         }
     }
