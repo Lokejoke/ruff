@@ -946,7 +946,7 @@ pub fn code_to_rule(linter: Linter, code: &str) -> Option<(RuleGroup, Rule)> {
         (Pydoclint, "502") => (RuleGroup::Preview, rules::pydoclint::rules::DocstringExtraneousException),
 
         // wps-light
-        (WpsLight, "116") => (RuleGroup::Preview, rules::wps_light::rules::ConsecutiveUnderscoresInName),
+        (WpsLight, "435") => (RuleGroup::Preview, rules::wps_light::rules::ListMultiplication),
         (WpsLight, "117") => (RuleGroup::Preview, rules::wps_light::rules::ReservedArgumentAsVariable),
         (WpsLight, "303") => (RuleGroup::Preview, rules::wps_light::rules::UnderscoresInNumber),
         (WpsLight, "362") => (RuleGroup::Preview, rules::wps_light::rules::AssignmentToSubscriptSlice),

@@ -1332,6 +1332,15 @@ pub(crate) fn expression(expr: &Expr, checker: &mut Checker) {
                 }
             }
         }
+        Expr::BinOp(
+            binary_op @ ast::ExprBinOp {
+                op: Operator::Mult, ..
+            },
+        ) => {
+            if checker.enabled(Rule::ListMultiplication) {
+                wps_light::rules::list_multiplication(checker, binary_op);
+            }
+        }
         Expr::UnaryOp(
             unary_op @ ast::ExprUnaryOp {
                 op,
