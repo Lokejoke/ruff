@@ -13,10 +13,13 @@ mod tests {
     use crate::test::test_path;
     use crate::{assert_messages, settings};
 
-    #[test_case(Rule::ListMultiplication, Path::new("WPS435.py"))]
+    #[test_case(Rule::ConsecutiveUnderscoresInName, Path::new("WPS116.py"))]
     #[test_case(Rule::ReservedArgumentAsVariable, Path::new("WPS117.py"))]
+    #[test_case(Rule::UseOfUnusedMarkedVariables, Path::new("WPS121.py"))]
     #[test_case(Rule::UnderscoresInNumber, Path::new("WPS303.py"))]
     #[test_case(Rule::AssignmentToSubscriptSlice, Path::new("WPS362.py"))]
+    #[test_case(Rule::ListMultiplication, Path::new("WPS435.py"))]
+    #[test_case(Rule::GetterWithoutReturnValue, Path::new("WPS463.py"))]
     fn rules(rule_code: Rule, path: &Path) -> Result<()> {
         let snapshot = format!("{}_{}", rule_code.as_ref(), path.to_string_lossy());
         let diagnostics = test_path(

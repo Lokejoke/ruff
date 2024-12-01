@@ -382,6 +382,9 @@ pub(crate) fn statement(stmt: &Stmt, checker: &mut Checker) {
             if checker.enabled(Rule::PostInitDefault) {
                 ruff::rules::post_init_default(checker, function_def);
             }
+            if checker.enabled(Rule::GetterWithoutReturnValue) {
+                wps_light::rules::getter_without_return_value(checker, function_def);
+            }
         }
         Stmt::Return(_) => {
             if checker.enabled(Rule::ReturnOutsideFunction) {
