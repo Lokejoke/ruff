@@ -49,7 +49,7 @@ jobs:
               - crates/ruff_text_size/**
               - crates/ruff_python_ast/**
               - crates/ruff_python_parser/**
-              - python/py-fuzzer/**
+              - scripts/fuzz-parser/**
               - .github/workflows/ci.yaml
 
             linter:
@@ -82,7 +82,6 @@ jobs:
             code:
               - "**/*"
               - "!**/*.md"
-              - "crates/red_knot_python_semantic/resources/mdtest/**/*.md"
               - "!docs/**"
               - "!assets/**"
 
@@ -116,7 +115,7 @@ jobs:
 
   cargo-test-linux:
     name: "cargo test (linux)"
-    runs-on: depot-ubuntu-22.04-16
+    runs-on: ubuntu-latest
     needs: determine_changes
     if: ${{ needs.determine_changes.outputs.code == 'true' || github.ref == 'refs/heads/main' }}
     timeout-minutes: 20
@@ -158,36 +157,9 @@ jobs:
           name: ruff
           path: target/debug/ruff
 
-  cargo-test-linux-release:
-    name: "cargo test (linux, release)"
-    runs-on: depot-ubuntu-22.04-16
-    needs: determine_changes
-    if: ${{ needs.determine_changes.outputs.code == 'true' || github.ref == 'refs/heads/main' }}
-    timeout-minutes: 20
-    steps:
-      - uses: actions/checkout@v4
-      - name: "Install Rust toolchain"
-        run: rustup show
-      - name: "Install mold"
-        uses: rui314/setup-mold@v1
-      - name: "Install cargo nextest"
-        uses: taiki-e/install-action@v2
-        with:
-          tool: cargo-nextest
-      - name: "Install cargo insta"
-        uses: taiki-e/install-action@v2
-        with:
-          tool: cargo-insta
-      - uses: Swatinem/rust-cache@v2
-      - name: "Run tests"
-        shell: bash
-        env:
-          NEXTEST_PROFILE: "ci"
-        run: cargo insta test --release --all-features --unreferenced reject --test-runner nextest
-
   cargo-test-windows:
     name: "cargo test (windows)"
-    runs-on: windows-latest-xlarge
+    runs-on: windows-latest
     needs: determine_changes
     if: ${{ needs.determine_changes.outputs.code == 'true' || github.ref == 'refs/heads/main' }}
     timeout-minutes: 20
@@ -225,8 +197,6 @@ jobs:
           cache: "npm"
           cache-dependency-path: playground/package-lock.json
       - uses: jetli/wasm-pack-action@v0.4.0
-        with:
-          version: v0.13.1
       - uses: Swatinem/rust-cache@v2
       - name: "Test ruff_wasm"
         run: |
@@ -240,7 +210,8 @@ jobs:
   cargo-build-release:
     name: "cargo build (release)"
     runs-on: macos-latest
-    if: ${{ github.ref == 'refs/heads/main' }}
+    needs: determine_changes
+    if: ${{ needs.determine_changes.outputs.code == 'true' || github.ref == 'refs/heads/main' }}
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
@@ -284,11 +255,11 @@ jobs:
           NEXTEST_PROFILE: "ci"
         run: cargo +${{ steps.msrv.outputs.value }} insta test --all-features --unreferenced reject --test-runner nextest
 
-  cargo-fuzz-build:
-    name: "cargo fuzz build"
+  cargo-fuzz:
+    name: "cargo fuzz"
     runs-on: ubuntu-latest
     needs: determine_changes
-    if: ${{ github.ref == 'refs/heads/main' }}
+    if: ${{ needs.determine_changes.outputs.code == 'true' || github.ref == 'refs/heads/main' }}
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
@@ -307,7 +278,7 @@ jobs:
       - run: cargo fuzz build -s none
 
   fuzz-parser:
-    name: "fuzz parser"
+    name: "Fuzz the parser"
     runs-on: ubuntu-latest
     needs:
       - cargo-test-linux
@@ -318,7 +289,13 @@ jobs:
       FORCE_COLOR: 1
     steps:
       - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - name: Install uv
+        run: curl -LsSf https://astral.sh/uv/install.sh | sh
+      - name: Install Python requirements
+        run: uv pip install -r scripts/fuzz-parser/requirements.txt --system
       - uses: actions/download-artifact@v4
         name: Download Ruff binary to test
         id: download-cached-binary
@@ -330,15 +307,7 @@ jobs:
           # Make executable, since artifact download doesn't preserve this
           chmod +x ${{ steps.download-cached-binary.outputs.download-path }}/ruff
 
-          (
-            uvx \
-            --python=${{ env.PYTHON_VERSION }} \
-            --from=./python/py-fuzzer \
-            fuzz \
-            --test-executable=${{ steps.download-cached-binary.outputs.download-path }}/ruff \
-            --bin=ruff \
-            0-500
-          )
+          python scripts/fuzz-parser/fuzz.py 0-500 --test-executable ${{ steps.download-cached-binary.outputs.download-path }}/ruff
 
   scripts:
     name: "test scripts"
@@ -362,7 +331,7 @@ jobs:
 
   ecosystem:
     name: "ecosystem"
-    runs-on: depot-ubuntu-latest-8
+    runs-on: ubuntu-latest
     needs:
       - cargo-test-linux
       - determine_changes
@@ -383,7 +352,7 @@ jobs:
           name: ruff
           path: target/debug
 
-      - uses: dawidd6/action-download-artifact@v7
+      - uses: dawidd6/action-download-artifact@v6
         name: Download baseline Ruff binary
         with:
           name: ruff
@@ -559,7 +528,7 @@ jobs:
       - name: "Install Rust toolchain"
         run: rustup show
       - name: Install uv
-        uses: astral-sh/setup-uv@v4
+        uses: astral-sh/setup-uv@v3
       - uses: Swatinem/rust-cache@v2
       - name: "Install Insiders dependencies"
         if: ${{ env.MKDOCS_INSIDERS_SSH_KEY_EXISTS == 'true' }}
@@ -592,12 +561,12 @@ jobs:
         run: rustup show
       - name: "Cache rust"
         uses: Swatinem/rust-cache@v2
-      - name: "Run checks"
+      - name: "Formatter progress"
         run: scripts/formatter_ecosystem_checks.sh
       - name: "Github step summary"
-        run: cat target/formatter-ecosystem/stats.txt > $GITHUB_STEP_SUMMARY
+        run: cat target/progress_projects_stats.txt > $GITHUB_STEP_SUMMARY
       - name: "Remove checkouts from cache"
-        run: rm -r target/formatter-ecosystem
+        run: rm -r target/progress_projects
 
   check-ruff-lsp:
     name: "test ruff-lsp"
