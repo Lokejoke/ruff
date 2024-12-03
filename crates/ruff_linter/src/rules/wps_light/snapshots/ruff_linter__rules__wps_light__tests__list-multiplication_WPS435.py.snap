@@ -1,0 +1,39 @@
+---
+source: crates/ruff_linter/src/rules/wps_light/mod.rs
+snapshot_kind: text
+---
+WPS435.py:3:15: WPS435 Multiplication of list of mutable objects
+  |
+1 | # Example 1: Multiplying a list of mutable strings
+2 | row = [""] * 3  # Creates a list with 3 references to the same empty string
+3 | tic_tac_toe = [row] * 3  # This will create 3 references to the same `row` list
+  |               ^^^^^^^^^ WPS435
+4 | tic_tac_toe[0][0] = 'X'  # This affects all rows because they refer to the same `row` list
+  |
+
+WPS435.py:7:9: WPS435 Multiplication of list of mutable objects
+  |
+6 | # Example 2: Multiplying a list of mutable dictionaries
+7 | board = [{"cell": ""}] * 3  # Creates a list with 3 references to the same dictionary
+  |         ^^^^^^^^^^^^^^^^^^ WPS435
+8 | tic_tac_toe_dict = [board] * 3  # This will create 3 references to the same `board` list
+9 | tic_tac_toe_dict[0][0]["cell"] = 'X'  # This affects all dictionaries because they refer to the same object
+  |
+
+WPS435.py:8:20: WPS435 Multiplication of list of mutable objects
+  |
+6 | # Example 2: Multiplying a list of mutable dictionaries
+7 | board = [{"cell": ""}] * 3  # Creates a list with 3 references to the same dictionary
+8 | tic_tac_toe_dict = [board] * 3  # This will create 3 references to the same `board` list
+  |                    ^^^^^^^^^^^ WPS435
+9 | tic_tac_toe_dict[0][0]["cell"] = 'X'  # This affects all dictionaries because they refer to the same object
+  |
+
+WPS435.py:18:22: WPS435 Multiplication of list of mutable objects
+   |
+16 | # Example 4: Nested lists of mutable objects (list of lists)
+17 | nested_board = [[""] * 3 for _ in range(3)]  # This creates separate lists for each row
+18 | tic_tac_toe_nested = [nested_board] * 3  # This will create 3 references to the same `nested_board` list
+   |                      ^^^^^^^^^^^^^^^^^^ WPS435
+19 | tic_tac_toe_nested[0][0][0] = 'X'  # This affects all nested lists because they refer to the same object
+   |

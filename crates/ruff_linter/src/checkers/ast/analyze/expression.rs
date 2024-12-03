@@ -16,7 +16,7 @@ use crate::rules::{
     flake8_future_annotations, flake8_gettext, flake8_implicit_str_concat, flake8_logging,
     flake8_logging_format, flake8_pie, flake8_print, flake8_pyi, flake8_pytest_style, flake8_self,
     flake8_simplify, flake8_tidy_imports, flake8_type_checking, flake8_use_pathlib, flynt, numpy,
-    pandas_vet, pep8_naming, pycodestyle, pyflakes, pylint, pyupgrade, refurb, ruff,
+    pandas_vet, pep8_naming, pycodestyle, pyflakes, pylint, pyupgrade, refurb, ruff, wps_light,
 };
 use crate::settings::types::PythonVersion;
 
@@ -1341,6 +1341,15 @@ pub(crate) fn expression(expr: &Expr, checker: &mut Checker) {
                 }
             }
         }
+        Expr::BinOp(
+            binary_op @ ast::ExprBinOp {
+                op: Operator::Mult, ..
+            },
+        ) => {
+            if checker.enabled(Rule::ListMultiplication) {
+                wps_light::rules::list_multiplication(checker, binary_op);
+            }
+        }
         Expr::UnaryOp(
             unary_op @ ast::ExprUnaryOp {
                 op,
@@ -1438,6 +1447,9 @@ pub(crate) fn expression(expr: &Expr, checker: &mut Checker) {
             if checker.enabled(Rule::SingleItemMembershipTest) {
                 refurb::rules::single_item_membership_test(checker, expr, left, ops, comparators);
             }
+            if checker.enabled(Rule::InCompareWithSingleItemContainer) {
+                ruff::rules::in_compare_with_single_item_container(checker, compare);
+            }
         }
         Expr::NumberLiteral(number_literal @ ast::ExprNumberLiteral { .. }) => {
             if checker.source_type.is_stub() && checker.enabled(Rule::NumericLiteralTooLong) {
@@ -1445,6 +1457,9 @@ pub(crate) fn expression(expr: &Expr, checker: &mut Checker) {
             }
             if checker.enabled(Rule::MathConstant) {
                 refurb::rules::math_constant(checker, number_literal);
+            }
+            if checker.enabled(Rule::UnderscoresInNumber) {
+                wps_light::rules::underscores_in_number(checker, number_literal);
             }
         }
         Expr::StringLiteral(string_like @ ast::ExprStringLiteral { value, range: _ }) => {

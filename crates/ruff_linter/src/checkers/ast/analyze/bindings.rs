@@ -4,7 +4,7 @@ use ruff_text_size::Ranged;
 use crate::checkers::ast::Checker;
 use crate::codes::Rule;
 use crate::rules::{
-    flake8_import_conventions, flake8_pyi, flake8_type_checking, pyflakes, pylint, ruff,
+    flake8_import_conventions, flake8_pyi, flake8_type_checking, pyflakes, pylint, ruff, wps_light,
 };
 
 /// Run lint rules over the [`Binding`]s.
@@ -14,12 +14,14 @@ pub(crate) fn bindings(checker: &mut Checker) {
         Rule::InvalidAllFormat,
         Rule::InvalidAllObject,
         Rule::NonAsciiName,
+        Rule::ReservedArgumentAsVariable,
         Rule::UnaliasedCollectionsAbcSetImport,
         Rule::UnconventionalImportAlias,
         Rule::UnsortedDunderSlots,
         Rule::UnusedVariable,
         Rule::UnquotedTypeAlias,
         Rule::UsedDummyVariable,
+        Rule::ConsecutiveUnderscoresInName,
     ]) {
         return;
     }
@@ -97,6 +99,20 @@ pub(crate) fn bindings(checker: &mut Checker) {
         if checker.enabled(Rule::AssignmentInAssert) {
             if let Some(diagnostic) = ruff::rules::assignment_in_assert(checker, binding) {
                 checker.diagnostics.push(diagnostic);
+            }
+        }
+        if checker.enabled(Rule::ConsecutiveUnderscoresInName) {
+            if let Some(diagnostic) =
+                wps_light::rules::consecutive_underscores_in_name(checker.locator(), binding)
+            {
+                checker.diagnostics.push(diagnostic);
+            }
+        }
+        if checker.enabled(Rule::ReservedArgumentAsVariable) {
+            if let Some(dignostic) =
+                wps_light::rules::reserved_argument_as_variable(checker, binding)
+            {
+                checker.diagnostics.push(dignostic);
             }
         }
     }
