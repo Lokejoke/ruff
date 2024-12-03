@@ -13,6 +13,7 @@ use crate::rules::{
     flake8_pie, flake8_pyi, flake8_pytest_style, flake8_raise, flake8_return, flake8_simplify,
     flake8_slots, flake8_tidy_imports, flake8_type_checking, mccabe, pandas_vet, pep8_naming,
     perflint, pycodestyle, pyflakes, pygrep_hooks, pylint, pyupgrade, refurb, ruff, tryceratops,
+    wps_light,
 };
 use crate::settings::types::PythonVersion;
 
@@ -381,6 +382,9 @@ pub(crate) fn statement(stmt: &Stmt, checker: &mut Checker) {
             if checker.enabled(Rule::PostInitDefault) {
                 ruff::rules::post_init_default(checker, function_def);
             }
+            if checker.enabled(Rule::GetterWithoutReturnValue) {
+                wps_light::rules::getter_without_return_value(checker, function_def);
+            }
         }
         Stmt::Return(_) => {
             if checker.enabled(Rule::ReturnOutsideFunction) {
@@ -516,6 +520,9 @@ pub(crate) fn statement(stmt: &Stmt, checker: &mut Checker) {
             }
             if checker.enabled(Rule::FunctionCallInDataclassDefaultArgument) {
                 ruff::rules::function_call_in_dataclass_default(checker, class_def);
+            }
+            if checker.enabled(Rule::WrongClassBodyContent) {
+                ruff::rules::wrong_class_body_content(checker, class_def);
             }
             if checker.enabled(Rule::FStringDocstring) {
                 flake8_bugbear::rules::f_string_docstring(checker, body);
@@ -1623,6 +1630,9 @@ pub(crate) fn statement(stmt: &Stmt, checker: &mut Checker) {
             }
             if checker.enabled(Rule::NonPEP695TypeAlias) {
                 pyupgrade::rules::non_pep695_type_alias_type(checker, assign);
+            }
+            if checker.enabled(Rule::AssignmentToSubscriptSlice) {
+                wps_light::rules::assignment_to_subscript_slice(checker, assign);
             }
         }
         Stmt::AnnAssign(

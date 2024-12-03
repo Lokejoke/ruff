@@ -8,6 +8,7 @@ pub(crate) use default_factory_kwarg::*;
 pub(crate) use explicit_f_string_type_conversion::*;
 pub(crate) use function_call_in_dataclass_default::*;
 pub(crate) use implicit_optional::*;
+pub(crate) use in_compare_with_single_item_container::*;
 pub(crate) use incorrectly_parenthesized_tuple_in_subscript::*;
 pub(crate) use invalid_assert_message_literal_argument::*;
 pub(crate) use invalid_formatter_suppression_comment::*;
@@ -40,6 +41,7 @@ pub(crate) use unused_async::*;
 pub(crate) use unused_noqa::*;
 pub(crate) use used_dummy_variable::*;
 pub(crate) use useless_if_else::*;
+pub(crate) use wrong_class_body_content::*;
 pub(crate) use zip_instead_of_pairwise::*;
 
 mod ambiguous_unicode_character;
@@ -54,6 +56,7 @@ mod explicit_f_string_type_conversion;
 mod function_call_in_dataclass_default;
 mod helpers;
 mod implicit_optional;
+mod in_compare_with_single_item_container;
 mod incorrectly_parenthesized_tuple_in_subscript;
 mod invalid_assert_message_literal_argument;
 mod invalid_formatter_suppression_comment;
@@ -88,6 +91,7 @@ mod unused_async;
 mod unused_noqa;
 mod used_dummy_variable;
 mod useless_if_else;
+mod wrong_class_body_content;
 mod zip_instead_of_pairwise;
 
 #[derive(Clone, Copy)]

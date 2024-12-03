@@ -116,7 +116,7 @@ jobs:
 
   cargo-test-linux:
     name: "cargo test (linux)"
-    runs-on: depot-ubuntu-22.04-16
+    runs-on: ubuntu-latest
     needs: determine_changes
     if: ${{ needs.determine_changes.outputs.code == 'true' || github.ref == 'refs/heads/main' }}
     timeout-minutes: 20
@@ -160,10 +160,10 @@ jobs:
 
   cargo-test-linux-release:
     name: "cargo test (linux, release)"
-    runs-on: depot-ubuntu-22.04-16
+    runs-on: ubuntu-latest
     needs: determine_changes
     if: ${{ needs.determine_changes.outputs.code == 'true' || github.ref == 'refs/heads/main' }}
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - name: "Install Rust toolchain"
@@ -187,7 +187,7 @@ jobs:
 
   cargo-test-windows:
     name: "cargo test (windows)"
-    runs-on: windows-latest-xlarge
+    runs-on: windows-latest
     needs: determine_changes
     if: ${{ needs.determine_changes.outputs.code == 'true' || github.ref == 'refs/heads/main' }}
     timeout-minutes: 20
@@ -362,7 +362,7 @@ jobs:
 
   ecosystem:
     name: "ecosystem"
-    runs-on: depot-ubuntu-latest-8
+    runs-on: ubuntu-latest
     needs:
       - cargo-test-linux
       - determine_changes
