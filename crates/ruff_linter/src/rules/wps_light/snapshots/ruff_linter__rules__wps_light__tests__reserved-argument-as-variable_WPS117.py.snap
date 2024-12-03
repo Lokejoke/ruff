@@ -1,0 +1,112 @@
+---
+source: crates/ruff_linter/src/rules/wps_light/mod.rs
+snapshot_kind: text
+---
+WPS117.py:2:14: WPS117 Reserved argument name self used as variable
+  |
+2 | def x1(a, b, self): ...
+  |              ^^^^ WPS117
+3 | 
+4 | def x2(a, b, c): 
+  |
+
+WPS117.py:5:5: WPS117 Reserved argument name cls used as variable
+  |
+4 | def x2(a, b, c): 
+5 |     cls = 3
+  |     ^^^ WPS117
+6 | 
+7 | class X:
+  |
+
+WPS117.py:8:5: WPS117 Reserved argument name self used as variable
+   |
+ 7 | class X:
+ 8 |     self = 3
+   |     ^^^^ WPS117
+ 9 |     cls = 3
+10 |     mcs = 3
+   |
+
+WPS117.py:9:5: WPS117 Reserved argument name cls used as variable
+   |
+ 7 | class X:
+ 8 |     self = 3
+ 9 |     cls = 3
+   |     ^^^ WPS117
+10 |     mcs = 3
+   |
+
+WPS117.py:10:5: WPS117 Reserved argument name mcs used as variable
+   |
+ 8 |     self = 3
+ 9 |     cls = 3
+10 |     mcs = 3
+   |     ^^^ WPS117
+11 | 
+12 |     def x3(a, b, self): ...
+   |
+
+WPS117.py:12:18: WPS117 Reserved argument name self used as variable
+   |
+10 |     mcs = 3
+11 | 
+12 |     def x3(a, b, self): ...
+   |                  ^^^^ WPS117
+13 | 
+14 |     def x4(a, b, c): 
+   |
+
+WPS117.py:15:9: WPS117 Reserved argument name cls used as variable
+   |
+14 |     def x4(a, b, c): 
+15 |         cls = 3
+   |         ^^^ WPS117
+16 | 
+17 |     def x4(self=3): 
+   |
+
+WPS117.py:17:12: WPS117 Reserved argument name self used as variable
+   |
+15 |         cls = 3
+16 | 
+17 |     def x4(self=3): 
+   |            ^^^^ WPS117
+18 |         ...
+   |
+
+WPS117.py:20:5: WPS117 Reserved argument name cls used as variable
+   |
+18 |         ...
+19 | 
+20 | x = cls = 5
+   |     ^^^ WPS117
+21 | x = lambda self: self + 12
+22 | self = 2
+   |
+
+WPS117.py:21:12: WPS117 Reserved argument name self used as variable
+   |
+20 | x = cls = 5
+21 | x = lambda self: self + 12
+   |            ^^^^ WPS117
+22 | self = 2
+23 | mcs = 2
+   |
+
+WPS117.py:22:1: WPS117 Reserved argument name self used as variable
+   |
+20 | x = cls = 5
+21 | x = lambda self: self + 12
+22 | self = 2
+   | ^^^^ WPS117
+23 | mcs = 2
+   |
+
+WPS117.py:23:1: WPS117 Reserved argument name mcs used as variable
+   |
+21 | x = lambda self: self + 12
+22 | self = 2
+23 | mcs = 2
+   | ^^^ WPS117
+   |

@@ -945,6 +945,14 @@ pub fn code_to_rule(linter: Linter, code: &str) -> Option<(RuleGroup, Rule)> {
         (Pydoclint, "501") => (RuleGroup::Preview, rules::pydoclint::rules::DocstringMissingException),
         (Pydoclint, "502") => (RuleGroup::Preview, rules::pydoclint::rules::DocstringExtraneousException),
 
+        // wps-light
+        (WpsLight, "116") => (RuleGroup::Preview, rules::wps_light::rules::ConsecutiveUnderscoresInName),
+        (WpsLight, "117") => (RuleGroup::Preview, rules::wps_light::rules::ReservedArgumentAsVariable),
+        (WpsLight, "303") => (RuleGroup::Preview, rules::wps_light::rules::UnderscoresInNumber),
+        (WpsLight, "362") => (RuleGroup::Preview, rules::wps_light::rules::AssignmentToSubscriptSlice),
+        (WpsLight, "435") => (RuleGroup::Preview, rules::wps_light::rules::ListMultiplication),
+        (WpsLight, "463") => (RuleGroup::Preview, rules::wps_light::rules::GetterWithoutReturnValue),
+
         // ruff
         (Ruff, "001") => (RuleGroup::Stable, rules::ruff::rules::AmbiguousUnicodeCharacterString),
         (Ruff, "002") => (RuleGroup::Stable, rules::ruff::rules::AmbiguousUnicodeCharacterDocstring),
@@ -984,6 +992,8 @@ pub fn code_to_rule(linter: Linter, code: &str) -> Option<(RuleGroup, Rule)> {
         (Ruff, "040") => (RuleGroup::Preview, rules::ruff::rules::InvalidAssertMessageLiteralArgument),
         (Ruff, "041") => (RuleGroup::Preview, rules::ruff::rules::UnnecessaryNestedLiteral),
         (Ruff, "048") => (RuleGroup::Preview, rules::ruff::rules::MapIntVersionParsing),
+        (Ruff, "050") => (RuleGroup::Preview, rules::ruff::rules::WrongClassBodyContent),
+        (Ruff, "051") => (RuleGroup::Preview, rules::ruff::rules::InCompareWithSingleItemContainer),
         (Ruff, "052") => (RuleGroup::Preview, rules::ruff::rules::UsedDummyVariable),
         (Ruff, "055") => (RuleGroup::Preview, rules::ruff::rules::UnnecessaryRegularExpression),
         (Ruff, "100") => (RuleGroup::Stable, rules::ruff::rules::UnusedNOQA),
