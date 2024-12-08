@@ -1,0 +1,328 @@
+---
+source: crates/ruff_linter/src/rules/wps_light/mod.rs
+snapshot_kind: text
+---
+WPS303.py:15:5: WPS303 [*] Found underscores in number literal `1.000_000_01`
+   |
+13 | x = 1E+1
+14 | x = 1E-1
+15 | x = 1.000_000_01
+   |     ^^^^^^^^^^^^ WPS303
+16 | x = 123456789.123456789
+17 | x = 123456789.123456789E123456789
+   |
+   = help: Remove underscores from number literal
+
+ℹ Safe fix
+12 12 | x = 1.
+13 13 | x = 1E+1
+14 14 | x = 1E-1
+15    |-x = 1.000_000_01
+   15 |+x = 1.00000001
+16 16 | x = 123456789.123456789
+17 17 | x = 123456789.123456789E123456789
+18 18 | x = 123456789E123456789
+
+WPS303.py:50:7: WPS303 [*] Found underscores in number literal `0b1001_1010_0001_0100`
+   |
+48 | y = 100(no)
+49 | 
+50 | bin = 0b1001_1010_0001_0100
+   |       ^^^^^^^^^^^^^^^^^^^^^ WPS303
+51 | hex = 0x1b_a0_44_fe
+52 | dec = 33_554_432
+   |
+   = help: Remove underscores from number literal
+
+ℹ Safe fix
+47 47 | y = 100[no]
+48 48 | y = 100(no)
+49 49 | 
+50    |-bin = 0b1001_1010_0001_0100
+   50 |+bin = 0b1001101000010100
+51 51 | hex = 0x1b_a0_44_fe
+52 52 | dec = 33_554_432
+53 53 | real = 1_000.111_1e-1_000
+
+WPS303.py:51:7: WPS303 [*] Found underscores in number literal `0x1b_a0_44_fe`
+   |
+50 | bin = 0b1001_1010_0001_0100
+51 | hex = 0x1b_a0_44_fe
+   |       ^^^^^^^^^^^^^ WPS303
+52 | dec = 33_554_432
+53 | real = 1_000.111_1e-1_000
+   |
+   = help: Remove underscores from number literal
+
+ℹ Safe fix
+48 48 | y = 100(no)
+49 49 | 
+50 50 | bin = 0b1001_1010_0001_0100
+51    |-hex = 0x1b_a0_44_fe
+   51 |+hex = 0x1ba044fe
+52 52 | dec = 33_554_432
+53 53 | real = 1_000.111_1e-1_000
+54 54 | 
+
+WPS303.py:52:7: WPS303 [*] Found underscores in number literal `33_554_432`
+   |
+50 | bin = 0b1001_1010_0001_0100
+51 | hex = 0x1b_a0_44_fe
+52 | dec = 33_554_432
+   |       ^^^^^^^^^^ WPS303
+53 | real = 1_000.111_1e-1_000
+   |
+   = help: Remove underscores from number literal
+
+ℹ Safe fix
+49 49 | 
+50 50 | bin = 0b1001_1010_0001_0100
+51 51 | hex = 0x1b_a0_44_fe
+52    |-dec = 33_554_432
+   52 |+dec = 33554432
+53 53 | real = 1_000.111_1e-1_000
+54 54 | 
+55 55 | valid = 0_0_0
+
+WPS303.py:53:8: WPS303 [*] Found underscores in number literal `1_000.111_1e-1_000`
+   |
+51 | hex = 0x1b_a0_44_fe
+52 | dec = 33_554_432
+53 | real = 1_000.111_1e-1_000
+   |        ^^^^^^^^^^^^^^^^^^ WPS303
+54 | 
+55 | valid = 0_0_0
+   |
+   = help: Remove underscores from number literal
+
+ℹ Safe fix
+50 50 | bin = 0b1001_1010_0001_0100
+51 51 | hex = 0x1b_a0_44_fe
+52 52 | dec = 33_554_432
+53    |-real = 1_000.111_1e-1_000
+   53 |+real = 1000.1111e-1000
+54 54 | 
+55 55 | valid = 0_0_0
+56 56 | also_ok = 000
+
+WPS303.py:55:9: WPS303 [*] Found underscores in number literal `0_0_0`
+   |
+53 | real = 1_000.111_1e-1_000
+54 | 
+55 | valid = 0_0_0
+   |         ^^^^^ WPS303
+56 | also_ok = 000
+57 | 4_2
+   |
+   = help: Remove underscores from number literal
+
+ℹ Safe fix
+52 52 | dec = 33_554_432
+53 53 | real = 1_000.111_1e-1_000
+54 54 | 
+55    |-valid = 0_0_0
+   55 |+valid = 000
+56 56 | also_ok = 000
+57 57 | 4_2
+58 58 | 1_0000_0000
+
+WPS303.py:57:1: WPS303 [*] Found underscores in number literal `4_2`
+   |
+55 | valid = 0_0_0
+56 | also_ok = 000
+57 | 4_2
+   | ^^^ WPS303
+58 | 1_0000_0000
+59 | 0b1001_0100
+   |
+   = help: Remove underscores from number literal
+
+ℹ Safe fix
+54 54 | 
+55 55 | valid = 0_0_0
+56 56 | also_ok = 000
+57    |-4_2
+   57 |+42
+58 58 | 1_0000_0000
+59 59 | 0b1001_0100
+60 60 | 0xffff_ffff
+
+WPS303.py:58:1: WPS303 [*] Found underscores in number literal `1_0000_0000`
+   |
+56 | also_ok = 000
+57 | 4_2
+58 | 1_0000_0000
+   | ^^^^^^^^^^^ WPS303
+59 | 0b1001_0100
+60 | 0xffff_ffff
+   |
+   = help: Remove underscores from number literal
+
+ℹ Safe fix
+55 55 | valid = 0_0_0
+56 56 | also_ok = 000
+57 57 | 4_2
+58    |-1_0000_0000
+   58 |+100000000
+59 59 | 0b1001_0100
+60 60 | 0xffff_ffff
+61 61 | 0o5_7_7
+
+WPS303.py:59:1: WPS303 [*] Found underscores in number literal `0b1001_0100`
+   |
+57 | 4_2
+58 | 1_0000_0000
+59 | 0b1001_0100
+   | ^^^^^^^^^^^ WPS303
+60 | 0xffff_ffff
+61 | 0o5_7_7
+   |
+   = help: Remove underscores from number literal
+
+ℹ Safe fix
+56 56 | also_ok = 000
+57 57 | 4_2
+58 58 | 1_0000_0000
+59    |-0b1001_0100
+   59 |+0b10010100
+60 60 | 0xffff_ffff
+61 61 | 0o5_7_7
+62 62 | 1_00_00.5
+
+WPS303.py:60:1: WPS303 [*] Found underscores in number literal `0xffff_ffff`
+   |
+58 | 1_0000_0000
+59 | 0b1001_0100
+60 | 0xffff_ffff
+   | ^^^^^^^^^^^ WPS303
+61 | 0o5_7_7
+62 | 1_00_00.5
+   |
+   = help: Remove underscores from number literal
+
+ℹ Safe fix
+57 57 | 4_2
+58 58 | 1_0000_0000
+59 59 | 0b1001_0100
+60    |-0xffff_ffff
+   60 |+0xffffffff
+61 61 | 0o5_7_7
+62 62 | 1_00_00.5
+63 63 | 1e1_0
+
+WPS303.py:61:1: WPS303 [*] Found underscores in number literal `0o5_7_7`
+   |
+59 | 0b1001_0100
+60 | 0xffff_ffff
+61 | 0o5_7_7
+   | ^^^^^^^ WPS303
+62 | 1_00_00.5
+63 | 1e1_0
+   |
+   = help: Remove underscores from number literal
+
+ℹ Safe fix
+58 58 | 1_0000_0000
+59 59 | 0b1001_0100
+60 60 | 0xffff_ffff
+61    |-0o5_7_7
+   61 |+0o577
+62 62 | 1_00_00.5
+63 63 | 1e1_0
+64 64 | .1_4
+
+WPS303.py:62:1: WPS303 [*] Found underscores in number literal `1_00_00.5`
+   |
+60 | 0xffff_ffff
+61 | 0o5_7_7
+62 | 1_00_00.5
+   | ^^^^^^^^^ WPS303
+63 | 1e1_0
+64 | .1_4
+   |
+   = help: Remove underscores from number literal
+
+ℹ Safe fix
+59 59 | 0b1001_0100
+60 60 | 0xffff_ffff
+61 61 | 0o5_7_7
+62    |-1_00_00.5
+   62 |+10000.5
+63 63 | 1e1_0
+64 64 | .1_4
+65 65 | 0x_f
+
+WPS303.py:63:1: WPS303 [*] Found underscores in number literal `1e1_0`
+   |
+61 | 0o5_7_7
+62 | 1_00_00.5
+63 | 1e1_0
+   | ^^^^^ WPS303
+64 | .1_4
+65 | 0x_f
+   |
+   = help: Remove underscores from number literal
+
+ℹ Safe fix
+60 60 | 0xffff_ffff
+61 61 | 0o5_7_7
+62 62 | 1_00_00.5
+63    |-1e1_0
+   63 |+1e10
+64 64 | .1_4
+65 65 | 0x_f
+66 66 | 0o_5
+
+WPS303.py:64:1: WPS303 [*] Found underscores in number literal `.1_4`
+   |
+62 | 1_00_00.5
+63 | 1e1_0
+64 | .1_4
+   | ^^^^ WPS303
+65 | 0x_f
+66 | 0o_5
+   |
+   = help: Remove underscores from number literal
+
+ℹ Safe fix
+61 61 | 0o5_7_7
+62 62 | 1_00_00.5
+63 63 | 1e1_0
+64    |-.1_4
+   64 |+.14
+65 65 | 0x_f
+66 66 | 0o_5
+
+WPS303.py:65:1: WPS303 [*] Found underscores in number literal `0x_f`
+   |
+63 | 1e1_0
+64 | .1_4
+65 | 0x_f
+   | ^^^^ WPS303
+66 | 0o_5
+   |
+   = help: Remove underscores from number literal
+
+ℹ Safe fix
+62 62 | 1_00_00.5
+63 63 | 1e1_0
+64 64 | .1_4
+65    |-0x_f
+   65 |+0xf
+66 66 | 0o_5
+
+WPS303.py:66:1: WPS303 [*] Found underscores in number literal `0o_5`
+   |
+64 | .1_4
+65 | 0x_f
+66 | 0o_5
+   | ^^^^ WPS303
+   |
+   = help: Remove underscores from number literal
+
+ℹ Safe fix
+63 63 | 1e1_0
+64 64 | .1_4
+65 65 | 0x_f
+66    |-0o_5
+   66 |+0o5
