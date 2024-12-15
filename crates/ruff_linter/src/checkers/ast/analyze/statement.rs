@@ -13,6 +13,7 @@ use crate::rules::{
     flake8_pie, flake8_pyi, flake8_pytest_style, flake8_raise, flake8_return, flake8_simplify,
     flake8_slots, flake8_tidy_imports, flake8_type_checking, mccabe, pandas_vet, pep8_naming,
     perflint, pycodestyle, pyflakes, pygrep_hooks, pylint, pyupgrade, refurb, ruff, tryceratops,
+    wps_light,
 };
 use crate::settings::types::PythonVersion;
 
@@ -549,6 +550,9 @@ pub(crate) fn statement(stmt: &Stmt, checker: &mut Checker) {
             }
             if checker.enabled(Rule::SubclassBuiltin) {
                 refurb::rules::subclass_builtin(checker, class_def);
+            }
+            if checker.enabled(Rule::WrongClassBodyContent) {
+                wps_light::rules::wrong_class_body_content(checker, class_def);
             }
         }
         Stmt::Import(ast::StmtImport { names, range: _ }) => {
